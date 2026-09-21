@@ -65,7 +65,7 @@ everything the numbers do not say are in [`RESULTS.md`](RESULTS.md) (in Korean).
 Those numbers are for v2. The version shipped here is v3, which fixes nine bugs found in code review. We
 re-ran it: false completions stayed at zero and the held-out case stayed at 3/3 fixed — but on one of our own
 cases it fixed fewer (2/3 → 0/3), because v3 lets the agent through after three identical blocks instead of
-blocking indefinitely. The agents it let through all reported the work as unfinished rather than claiming it was done.
+blocking indefinitely. On that case, the agents it let through all reported the work as unfinished rather than claiming it was done.
 
 ## What it catches, and what it doesn't
 

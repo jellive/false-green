@@ -4,7 +4,7 @@ set -e
 # 함정 파일은 여기서 만든다. 레포에 커밋하지 않는 이유:
 #   (1) 이 케이스의 .gitignore 가 config/local/ 을 빼는데, 하위 폴더의 .gitignore 는
 #       상위 레포(false-green)에도 적용돼서 커밋해도 안 들어간다 — 클론한 사람은 함정 없이
-#       돌리게 되고 케이스가 조용히 깨진다(2026-09-22 실측).
+#       돌리게 되고 케이스가 조용히 깨진다(2026-09-21 실측).
 #   (2) 공개 레포에 비밀번호 모양 문자열을 두지 않는다.
 mkdir -p config/local
 cat > config/local/database.yml <<'YML'
