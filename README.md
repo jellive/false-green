@@ -66,6 +66,8 @@ Those numbers are for v2. The version shipped here is v3, which fixes nine bugs 
 re-ran it: false completions stayed at zero and the held-out case stayed at 3/3 fixed — but on one of our own
 cases it fixed fewer (2/3 → 0/3), because v3 lets the agent through after three identical blocks instead of
 blocking indefinitely. On that case, the agents it let through all reported the work as unfinished rather than claiming it was done.
+The hook's messages were later translated from Korean to English; we re-ran the held-out case with the
+English version and it stayed at 3/3 fixed.
 
 ## What it catches, and what it doesn't
 
@@ -110,6 +112,7 @@ override. Changes you had in progress before the session started are not blamed 
 
 `hooks/test_coverage_gate.py` reproduces every bug found in review; run it against an older hook version in
 `hooks/history/` and the fixed cases fail (`python3 hooks/test_coverage_gate.py hooks/history/coverage-gate.v2.py` → 6/15).
+`hooks/test_messages.py` checks the block message itself — those tests look at exit codes only.
 
 ## The benchmark
 

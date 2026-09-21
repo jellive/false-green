@@ -40,6 +40,7 @@ class Gate:
         ev = json.dumps({"cwd": cwd or self.d, "session_id": self.sid, "stop_hook_active": False})
         env = dict(os.environ, CLAUDE_CONFIG_DIR=self.cfg); env.pop("CLAUDE_PLUGIN_DATA", None)
         p = subprocess.run([sys.executable, HOOK, *args], input=ev, capture_output=True, text=True, env=env, timeout=120)
+        self.err = p.stderr
         return p.returncode
 
 def edit(d, p, s):

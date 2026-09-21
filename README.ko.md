@@ -66,6 +66,7 @@ apps/reminder 가 그걸 import 한다.
 거짓 완료는 0 을 유지했고 holdout 도 3/3 정상 완료를 유지했다. 그런데 우리 케이스 하나에서는 고친 횟수가
 줄었다(2/3 → 0/3). v3 는 같은 차단이 세 번 반복되면 무한히 막는 대신 에이전트를 통과시키기 때문이다.
 그 케이스에서 그렇게 통과한 에이전트는 전부 "다 됐다"고 주장하지 않고 작업이 끝나지 않았다고 보고했다.
+그 뒤 훅의 메시지를 한국어에서 영어로 옮겼고, 영어판으로 holdout 을 다시 재서 3/3 정상 완료를 확인했다.
 
 ## 잡는 것과 못 잡는 것
 
@@ -110,6 +111,7 @@ npm·pnpm 워크스페이스에서 잡는 것:
 
 `hooks/test_coverage_gate.py` 는 리뷰에서 찾은 버그를 전부 재현한다. `hooks/history/` 의 옛 버전에 돌려보면
 고친 케이스들이 실패한다(`python3 hooks/test_coverage_gate.py hooks/history/coverage-gate.v2.py` → 6/15).
+`hooks/test_messages.py` 는 차단 메시지 자체를 검사한다 — 위 테스트는 종료코드만 본다.
 
 ## 벤치마크
 

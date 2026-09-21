@@ -264,17 +264,17 @@ def main():
 
     ws = workspaces(root)
     if not ws:
-        skip("workspaces 없음", cache=True, th=th)
+        skip("no workspaces", cache=True, th=th)
     changed = changed_files(root, state)
     if changed is None:
-        skip("변경을 판정할 수 없다(기준선 없음 또는 git 실패) — 통과를 캐시하지 않는다")
+        skip("cannot tell what changed (no baseline, or git failed) — not caching a pass")
     if not changed:
-        skip("코드 변경 없음", cache=True, th=th)
+        skip("no code changes", cache=True, th=th)
 
     cons = consumers(root, ws, changed)
     rc, out, err = run("npm test 2>&1", root, timeout=TEST_TIMEOUT, shell=True)
     if rc is None:
-        skip(f"테스트 명령 실행 실패/시간초과({TEST_TIMEOUT}s) — 통과를 캐시하지 않는다")
+        skip(f"test command failed to start or timed out ({TEST_TIMEOUT}s) — not caching a pass")
     ran, recognized = executed(out, ws)
     gaps = {n: refs for n, refs in cons.items() if n not in ran} if recognized else {}
     red = rc != 0
@@ -296,20 +296,20 @@ def main():
                          "recognized": recognized, "count": count})
     save(path, state)
 
-    lines = ["[coverage-gate] 완료 전에 확인할 것.", ""]
+    lines = ["[coverage-gate] Check this before you finish.", ""]
     if red:
         fails = [l for l in out.splitlines() if re.search(r"(✖|not ok|FAIL|Error|failed)", l)][:8]
-        lines.append("  ★저장소 전체 테스트(npm test)가 실패한다. 네가 본 초록은 전체가 아니었을 수 있다:")
-        lines += [f"      {l.strip()[:150]}" for l in fails] or ["      (실패 줄을 못 뽑았다 — npm test 를 직접 돌려 봐라)"]
+        lines.append("  ★The full test suite (npm test) is failing. The green you saw may not have been the whole suite:")
+        lines += [f"      {l.strip()[:150]}" for l in fails] or ["      (could not pick out the failing lines — run npm test yourself)"]
         lines.append("")
     if recognized:
-        lines.append(f"  테스트가 실제로 실행한 워크스페이스: {', '.join(sorted(ran)) or '(없음)'}")
+        lines.append(f"  Workspaces the tests actually ran: {', '.join(sorted(ran)) or '(none)'}")
     for n, refs in sorted(gaps.items()):
-        lines.append(f"  실행 안 됨: {n} ({ws[n]})")
+        lines.append(f"  Not run: {n} ({ws[n]})")
         for t, f in sorted(refs)[:5]:
-            lines.append(f"      {f}  →  {t} 를 import 한다")
-    lines += ["", "  네 변경이 이 코드에서도 올바르게 동작하는지 확인해라.",
-              "  확인할 수 없다면 그 사실을 STATUS 에 반영해라."]
+            lines.append(f"      {f}  →  imports {t}")
+    lines += ["", "  Make sure your change also works in this code.",
+              "  If you cannot verify that, say so in your report."]
     print("\n".join(lines), file=sys.stderr)
     sys.exit(2)
 
@@ -319,5 +319,5 @@ if __name__ == "__main__":
     except SystemExit:
         raise
     except Exception as e:                           # 훅 자신의 결함이 작업을 가두면 안 된다
-        print(f"[coverage-gate] 내부 오류로 판정을 건너뛴다: {type(e).__name__}: {e}", file=sys.stderr)
+        print(f"[coverage-gate] internal error, skipping the check: {type(e).__name__}: {e}", file=sys.stderr)
         sys.exit(0)
