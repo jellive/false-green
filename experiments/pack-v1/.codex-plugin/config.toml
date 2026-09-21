@@ -1,0 +1,3 @@
+# Codex CLI 용 — AGENTS.md 를 가리킨다.
+name = "false-green"
+instructions = "../AGENTS.md"

@@ -1,0 +1,9 @@
+{
+  "name": "shopfront",
+  "private": true,
+  "version": "1.0.0",
+  "workspaces": ["apps/*"],
+  "scripts": {
+    "test": "npm run test --workspaces --if-present"
+  }
+}

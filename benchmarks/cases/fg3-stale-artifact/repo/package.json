@@ -1,0 +1,6 @@
+{ "name": "form-validator", "version": "1.4.2", "type": "module",
+  "main": "dist/validate.js",
+  "scripts": {
+    "build": "node build.js",
+    "test": "node --test test/*.test.js"
+  } }

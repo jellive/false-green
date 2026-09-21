@@ -1,0 +1,3 @@
+{ "name": "@acme/label-printer", "version": "3.0.1", "type": "module",
+  "scripts": { "start": "node src/index.js", "test": "node --test test/*.test.js" },
+  "dependencies": { "@acme/units": "workspace:*" } }

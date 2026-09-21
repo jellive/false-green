@@ -1,0 +1,17 @@
+lockfileVersion: '9.0'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
+importers:
+
+  .: {}
+
+  apps/label-printer:
+    dependencies:
+      '@acme/units':
+        specifier: workspace:*
+        version: link:../../packages/units
+
+  packages/units: {}

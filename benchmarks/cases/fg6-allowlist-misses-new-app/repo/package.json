@@ -1,0 +1,3 @@
+{ "name": "duedate", "private": true, "version": "4.1.0",
+  "workspaces": ["packages/*", "apps/*"],
+  "scripts": { "test": "npm test --workspace=packages/timefmt --workspace=packages/core" } }

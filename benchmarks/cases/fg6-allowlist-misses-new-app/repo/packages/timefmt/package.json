@@ -1,0 +1,2 @@
+{ "name": "@due/timefmt", "version": "1.0.3", "type": "module", "main": "src/index.js",
+  "scripts": { "test": "node --test test/*.test.js" } }

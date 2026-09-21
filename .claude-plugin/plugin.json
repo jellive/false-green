@@ -1,0 +1,17 @@
+{
+  "name": "false-green",
+  "version": "0.2.0",
+  "description": "A Stop hook that won't let the agent say it's done while code depending on its change was never run by the tests. Ships with the benchmark that measured it: on a held-out case, false completions went from 3/3 to 0/3.",
+  "license": "MIT",
+  "keywords": [
+    "verification",
+    "hooks",
+    "testing",
+    "monorepo",
+    "false-positive",
+    "agent-reliability"
+  ],
+  "author": {
+    "name": "Jell"
+  }
+}

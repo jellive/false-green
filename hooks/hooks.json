@@ -1,0 +1,11 @@
+{
+  "description": "coverage-gate: before the agent says it is done, check that the code depending on its change was actually run by the tests.",
+  "hooks": {
+    "SessionStart": [
+      { "hooks": [ { "type": "command", "command": "python3", "args": ["${CLAUDE_PLUGIN_ROOT}/hooks/coverage-gate.py", "--session-start"] } ] }
+    ],
+    "Stop": [
+      { "hooks": [ { "type": "command", "command": "python3", "args": ["${CLAUDE_PLUGIN_ROOT}/hooks/coverage-gate.py"], "timeout": 300 } ] }
+    ]
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "name": "false-green",
+  "description": "Verification hooks for coding agents, shipped with the benchmark that measured them.",
+  "owner": {
+    "name": "Jell"
+  },
+  "plugins": [
+    {
+      "name": "false-green",
+      "source": "./",
+      "description": "A Stop hook that won't let the agent say it's done while code depending on its change was never run by the tests.",
+      "version": "0.2.0",
+      "author": {
+        "name": "Jell"
+      }
+    }
+  ]
+}
